@@ -56,7 +56,7 @@ func (p *Parser) parseLetStatement() *ast.LetStatement {
 	st := &ast.LetStatement{}
 
 	p.nextToken()
-	if p.curToken.Type != scanner.TokenTypeIdentifier {
+	if !p.curTokenIs(scanner.TokenTypeIdentifier) {
 		fmt.Printf("parse code error, should be identifier instead of %s\n", p.curToken)
 		return nil
 	}
@@ -65,18 +65,23 @@ func (p *Parser) parseLetStatement() *ast.LetStatement {
 	}
 
 	p.nextToken()
-	if p.curToken.Type != scanner.TokenTypeEqual {
+	if !p.curTokenIs(scanner.TokenTypeEqual) {
 		fmt.Printf("parse code error, should be '=' instead of %s\n", p.curToken)
 		return nil
 	}
 
-	// TODO:
+	// TODO: 解析表达式
+
 	p.nextToken()
-	for p.curToken.Type != scanner.TokenTypeSemicolon {
+	for !p.curTokenIs(scanner.TokenTypeSemicolon) {
 		p.nextToken()
 	}
 
 	return st
+}
+
+func (p *Parser) curTokenIs(t scanner.TokenType) bool {
+	return p.curToken.Type == t
 }
 
 func (p *Parser) nextToken() {
