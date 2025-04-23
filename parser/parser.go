@@ -43,6 +43,8 @@ func (p *Parser) parseStatement() ast.Statement {
 	switch p.curToken.Type {
 	case scanner.TokenTypeLet:
 		st = p.parseLetStatement()
+	case scanner.TokenTypeReturn:
+		st = p.parseReturnStatement()
 	}
 	return st
 }
@@ -53,7 +55,9 @@ func (p *Parser) parseLetStatement() *ast.LetStatement {
 		return nil
 	}
 
-	st := &ast.LetStatement{}
+	st := &ast.LetStatement{
+		Token: *p.curToken,
+	}
 
 	p.nextToken()
 	if !p.curTokenIs(scanner.TokenTypeIdentifier) {
@@ -77,6 +81,19 @@ func (p *Parser) parseLetStatement() *ast.LetStatement {
 		p.nextToken()
 	}
 
+	return st
+}
+
+func (p *Parser) parseReturnStatement() *ast.ReturnStatement {
+	st := &ast.ReturnStatement{
+		Token: *p.curToken,
+	}
+
+	// TODO: 解析表达式
+
+	for !p.curTokenIs(scanner.TokenTypeSemicolon) {
+		p.nextToken()
+	}
 	return st
 }
 

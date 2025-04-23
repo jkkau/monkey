@@ -2,8 +2,8 @@
   
 运行单元测试:  
 ```
-cd scanner
-go test
+cd monkey
+go test ./...
 ```
   
 运行REPL：  

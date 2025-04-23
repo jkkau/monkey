@@ -53,3 +53,17 @@ func (i *Identifier) TokenLiteral() string {
 
 func (i *Identifier) ExpressionNode() {
 }
+
+// example: return [expression]
+// ReturnStatement实现Statement接口
+type ReturnStatement struct {
+	Token scanner.Token
+	Value Expression
+}
+
+func (r *ReturnStatement) TokenLiteral() string {
+	return r.Token.Lexeme
+}
+
+func (r *ReturnStatement) StatementNode() {
+}

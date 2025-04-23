@@ -67,7 +67,7 @@ var tokenMap = map[TokenType]string{
 	TokenTypeReturn:       "RETURN",
 	TokenTypeTrue:         "TRUE",
 	TokenTypeFalse:        "FALSE",
-	TokenTypeLet: "LET",
+	TokenTypeLet:          "LET",
 }
 
 type Token struct {
